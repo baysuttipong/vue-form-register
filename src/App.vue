@@ -1,20 +1,46 @@
 <script setup>
-  const message = "Hello Vue 3 + Vite"
+import { reactive } from 'vue'
+const gendersList = ['ชาย', 'หญิง', 'ไม่ระบุ']
+const interestsList = ['หนังสือ','กีฬา','เกม','การเมือง']
+const formData = reactive({interests:[]})
+const submitForm = () => {
+  console.log('submit form')
+  console.log(formData)
+}
 </script>
 
 <template>
-  <div class="hello">
-    Hello {{ message }}
+  <div>
+    <div>
+      <div>Fisrtname</div>
+      <input type="text" name ="firstname" v-model="formData.firstname">
+    </div>
+
+    <div>
+     <div>Lastname</div>
+     <input type="text" name ="lastname" v-model="formData.lastname">
+    </div>
+    
+    <div>
+      <div>Gender</div>
+        <div v-for="gender in gendersList">
+          <input type="radio" name="gender" :value="gender" v-model="formData.gender">
+          {{gender}}
+        </div>
+    </div>
+
+    <div>
+      <div>Interests</div>
+        <div v-for="interest in interestsList">
+          <input type="checkbox" name="interest" :value="interest" v-model="formData.interests">
+          {{interest}}
+        </div>
+    </div>
+
+    <div>
+      <div>Description</div>
+      <textarea v-model="formData.description"></textarea>
+    </div>
+    <button @click="submitForm">ส่ง Form</button>
   </div>
 </template>
-
-<style>
-  .hello{
-    color: red;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 30px;
-    background-color: aquamarine;
-  }
-</style>
